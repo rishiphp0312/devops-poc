@@ -1,0 +1,125 @@
+README file info 
+First command 
+$ docker build -t first-image-flask-app-py .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:27e141c6dad09ad191bc6f3266ffc2b1940ec56c2d0edaa8edffc7e62c2cecb0
+#1 transferring dockerfile: 30B 0.0s
+#1 transferring dockerfile: 205B 0.0s done
+#1 DONE 0.3s
+
+#2 [internal] load .dockerignore
+#2 sha256:06b764b1507e0b4f95b704c03e308f2d8eba72f741fea4d84ff47ac854aa0629
+#2 transferring context: 2B 0.0s done
+#2 DONE 0.3s
+failed to solve with frontend dockerfile.v0: failed to create LLB definition: dockerfile parse error line 12: unknown instruction: ENTRYPOINT["PYTHON","APP.PY"
+2) corrected the syntax due to space 
+
+3)now create image 
+$ docker build -t first-image-flask-app-py .
+
+
+3)check the images in list 
+$ docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED              SIZE
+first-image-flask-app-py    latest    75b4f5dea9e5   About a minute ago   1.14GB
+
+
+4)run the container 
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker run -d -p 5000:5000 --name myfirst-dokcer-conatiner  first-image-flask-app-py
+b32859ba7f3f63cbbc0b6e9d7028fa14a7cc62e9c95ff2b2a2e29796903667dc
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker ps -a
+CONTAINER ID   IMAGE                              COMMAND                  CREATED          STATUS                       PORTS                                        NAMES
+b32859ba7f3f   first-image-flask-app-py           "python app.py"          12 seconds ago   Exited (1) 8 seconds ago                                                  myfirst-dokcer-conatiner
+43ed5d68710a   confluentinc/cp-kafka:latest       "/etc/confluent/dock…"   17 months ago    Exited (255) 24 hours ago    0.0.0.0:9092->9092/tcp                       kafka
+ca657d081b18   confluentinc/cp-zookeeper:latest   "/etc/confluent/dock…"   17 months ago    Exited (255) 24 hours ago    2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp   zookeeper
+22ccccd78e71   3be54dbc7ac1                       "/opt/sonarqube/dock…"   17 months ago    Created                                                                   sonarqube_new
+03da36118dd4   3be54dbc7ac1                       "/opt/sonarqube/dock…"   17 months ago    Created                                                                   sonarqubenew
+74c169d27e84   3be54dbc7ac1                       "/opt/sonarqube/dock…"   17 months ago    Exited (255) 17 months ago   0.0.0.0:9000->9000/tcp                       sonarqube
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker logs myfirst-dokcer-conatiner
+  File "//app.py", line 14
+    if __name__=="__main__";
+                           ^
+SyntaxError: invalid syntax
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker build -t first-image-flask-app-py .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:58b21b8ec5e75a7de8a4757c568b4878b366964268542cbbd0294154af19c54a
+#1 transferring dockerfile: 32B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:55ebf7f144c697c921786ab50c7785c25b50a167e9ead450828da08139d9f3ce
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:latest
+#3 sha256:25baba7cb1ff1faed5b407f213f787f42274cfec06d39ad674c6905f347a48f7
+#3 DONE 2.0s
+
+#4 [1/4] FROM docker.io/library/python@sha256:16e7e5fc4e79fe153c818ac9b46595c7addddaad744d49595377836e300ad1c6
+#4 sha256:fcfffa52156c66e82adf35fcccfdd8757ce43e40bf42a8b44ea355e35cf56d0c
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 sha256:0292f2f9cc1aa119273fdbfc7b23c758096b4bb480611570695da67f8c91dfd0
+#5 transferring context: 341B 0.0s done
+#5 DONE 0.0s
+
+#6 [2/4] COPY requirements.txt requirements.txt
+#6 sha256:5d0c01ce6f3abfb816470d76b6c2b7c2d96c416cd96b25bc72d86e3f36342767
+#6 CACHED
+
+#7 [3/4] RUN pip install -r requirements.txt
+#7 sha256:25b573bc5595679cdef9aa0fa87951097e03935286f704ea4c75d0eb0d4c95da
+#7 CACHED
+
+#8 [4/4] COPY app.py app.py
+#8 sha256:6ba788a3232ded559436fc3ff518774420524816d3d3a03af1944b168827a743
+#8 DONE 0.1s
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers 0.1s done
+#9 writing image sha256:70577fec6e29c1256e12a15fdf6877cbdd701979ec2a447a80e34d36e24fafc4
+#9 writing image sha256:70577fec6e29c1256e12a15fdf6877cbdd701979ec2a447a80e34d36e24fafc4 done
+#9 naming to docker.io/library/first-image-flask-app-py done
+#9 DONE 0.1s
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED          SIZE
+first-image-flask-app-py    latest    70577fec6e29   6 seconds ago    1.14GB
+<none>                      <none>    75b4f5dea9e5   16 minutes ago   1.14GB
+confluentinc/cp-kafka       latest    552388c0a755   17 months ago    1.11GB
+confluentinc/cp-zookeeper   latest    fbebbaf823b3   17 months ago    1.11GB
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker rm ^C
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker rm myfirst-dokcer-conatiner
+myfirst-dokcer-conatiner
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker run -d -p 5000:5000 --name myfirst-docker-container first-image-flask-app-py
+46b535d95849e64636f8d29489852b6786505efa3bebd6705753fecfe834769c
+
+User@WINDOWS-C4D3EEO MINGW64 /d/poc-birlasoft
+$ docker ps
+CONTAINER ID   IMAGE                      COMMAND           CREATED          STATUS         PORTS                    NAMES
+46b535d95849   first-image-flask-app-py   "python app.py"   10 seconds ago   Up 4 seconds   0.0.0.0:5000->5000/tcp   myfirst-docker-container
